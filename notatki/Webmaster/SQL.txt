@@ -1,0 +1,236 @@
+Content-Type: text/x-zim-wiki
+Wiki-Format: zim 0.4
+
+<<<<<<< HEAD
+Creation-Date: 2018-05-15T16:51:56+02:00
+
+====== SQL ======
+Created wtorek 15 maj 2018
+
+**systemy/silinki baz danych**
+* mySQL
+* MariaDB
+* PostgreSQL
+* Microsoft SQLServer
+* SQLite3
+
+
+__CREATE TABLE__ tworzy nową tabelę
+__INSERT INTO__ dodaje nowy wiersz do tabeli
+__SELECT__ zapytania danych z tabeli
+__UPDATE__ edytyje wiersz w tabeli
+__ALTER TABLE__ zmienia istniejące tabele
+__DELETE FROM__ usówa wiersze z tabeli
+__AS__ zmienia nazwę kolumny lub tabeli
+__DISTINCT__ zwraca unikalne wartości
+__WHERE__ filtruje wyników zapytania na podstawie określonych warunków. Operatorzy WHERE: =  !=  >  <  >=  <=	
+__LIKE__ jest specjalnym operatorem używanym z klauzulą ​​WHERE do wyszukiwania określonego wzorca w kolumnie. Operatorzy: _  jeden znak ; % wiele znaków
+__NULL__ oznacza nieznane wartości. Operatorzy: IS NULL; IS NOT NULL
+__BETWEEN__ może być użyty w klauzuli WHERE do filtrowania zestawu wyników w pewnym zakresie. Wartości mogą być liczbami, tekstem lub datami
+__AND__ łączy wiele warunków w klauzuli WHERE, aby zestaw wyników był bardziej szczegółowy i użyteczny. Operator AND wyświetla wiersz, jeśli wszystkie warunki są spełnione
+__OR__ łączy wiele warunków w klauzuli WHERE, aby zestaw wyników był bardziej szczegółowy i użyteczny. Operator OR wyświetla wiersz, jeśli dowolny warunek jest prawdziwy
+__ORDER BY__ sortuje wyniki alfabetycznie lub numerycznie
+__LIMIT__ pozwala określić maksymalną liczbę wierszy, które będzie miał zestaw wyników  
+__CASE__ pozwala nam tworzyć różne wyniki (zwykle w instrukcji SELECT)
+__COUNT()__ policz liczbę wierszy
+__SUM()__ suma wartości w kolumnie
+__MAX()__ największa wartość 
+__MIN()__ najmniejsza wartość
+__AVG()__ średnia wartość w kolumnie
+__ROUND()__ zaogrąlij wartości w kolumnie
+__GROUP BY__ łączenie danych z jednej lub więcej kolumn.
+__HAVING__ ograniczya wyniki zapytania na podstawie właściwości zagregowanej.
+__JOIN__ łączy wiersze z różnych tabel, jeśli warunek łączenia jest prawdziwy.
+__LEFT JOIN__ zwróci każdy wiersz w lewej tabeli, a jeśli warunek łączenia nie zostanie spełniony, wartości NULL zostaną użyte do wypełnienia kolumn z prawej tabeli.
+__CROSS JOIN__ pozwala nam łączyć wszystkie wiersze jednego stołu ze wszystkimi wierszami innego stołu
+__UNION__ umieszcza jeden zestaw danych na drugim.
+__WITH__ pozwala nam zdefiniować grupę tabel tymczasowych, które mogą być użyte w zapytaniu końcowym.
+
+//Klucz podstawowy// to kolumna, która obsługuje unikalny identyfikator wierszy w tabeli.
+//Klucz obcy// to kolumna zawierająca klucz podstawowy do innej tabeli.
+
+**SELECT name,**
+** CASE**
+**  WHEN genre = 'romance' THEN 'Chill'**
+**  WHEN genre = 'comedy' THEN 'Chill'**
+**  ELSE 'Intense'**
+** END AS 'Mood'**
+**FROM movies;**
+
+**WITH previous_query AS (**
+**SELECT customer_id,**
+**       COUNT(subscription_id) as subscriptions**
+**FROM orders**
+**GROUP BY customer_id)**
+**SELECT customers.customer_name,**
+**previous_query.subscriptions**
+**FROM previous_query**
+**JOIN customers**
+**	ON customers.customer_id = previous_query.customer_id;**
+=======
+Creation-Date: 2018-05-30T08:17:18+02:00
+
+====== SQL ======
+Created środa 30 maja 2018
+
+CSV -
+
+== KWERWENDY WYBIERAJĄCE ==
+
+**select * from tbFilmy;** - wybierz wszystkie rekordy i pola z tabeli Filmy
+
+**SELECT name, genre FROM tbFilmy;** - wybierz pola z kolumny nazwa i kolumny gatunek z tabeli Filmy
+
+SELECT** name AS nazwa, genre AS gatunek **FROM tbFilmy; - aliasowanie
+
+cur.execute(**"""**
+		SELECT name AS nazwa, genre AS gatunek FROM tbFilmy
+	**"""**)   - między """ dowolna długość zapytania
+
+**rekord = [x.strip() for x in rekord]**  -- usówanie pustych znaków  (spacja na końcu elementu 'trailing spaces')
+
+**SELECT DISTINCT genre FROM tbFilmy;** - wybierz unikalne wartości dla gatunku
+
+**SELECT name AS tytul, imdb_rating FROM tbFilmy WHERE imdb_rating < 5;** - wybierz tytuły i oceny z tabeli Filmy, w których ocena jest mniejsza od 5
+
+**SELECT name AS tytul, imdb_rating FROM tbFilmy WHERE imdb_rating > 8.5 ORDER BY imdb_rating ASC;** — wybierz filmy, których ocena jest większa od 8.5 i uporządkuj rosnąco
+
+**SELECT name AS tytul, imdb_rating FROM tbFilmy WHERE imdb_rating > 8.5 ORDER BY imdb_rating DESC;** — wybierz filmy, których ocena jest większa od 8.5 i uporządkuj malejąco
+
+SELECT name AS tytul, imdb_rating FROM tbFilmy WHERE imdb_rating > 8.5 **AND imdb_rating <> ''** ORDER BY imdb_rating DESC; - i pomiń wartości puste
+
+**SELECT name AS tytul, imdb_rating FROM tbFilmy WHERE imdb_rating='';**               \
+**SELECT name AS tytul, imdb_rating FROM tbFilmy WHERE imdb_rating LIKE '';**        \ - wybierz filmy, których pole oceny jest puste
+
+**WHERE imdb_rating IS NULL** - gdzie nie ma żadnej wartości
+
+**UPDATE tbFilmy SET imdb_rating=NULL WHERE imdb_rating='';** — zmień filmy tam gdzie wartość oceny jest pusta na jej brak
+
+**SELECT name AS tytul FROM tbFilmy WHERE tytul LIKE 'Se_en';**   — na _ może wskoczyć dowolna liczba lub cyfra (jeden znak to jeden _!!!)
+//Se7en//
+//Seven//
+**SELECT name AS tytul FROM tbFilmy WHERE tytul LIKE '_____';** — mają 5 znaków
+//Shrek//
+//Brave//
+//Blade  (...)//
+**SELECT name AS tytul FROM tbFilmy WHERE tytul LIKE 'S%';** — zaczynają się na S
+//Star Wars: Episode I - The Phantom Menace//
+//Star Wars//
+//Spider-Man  (...)//
+**SELECT name AS tytul FROM tbFilmy WHERE tytul LIKE 'S%n';** — zaczynają się na S i kończą na N
+//Spider-Man//
+//Saving Private Ryan//
+//Se7en (...)//
+**SELECT name AS tytul FROM tbFilmy WHERE tytul LIKE '%n';**  — kończą się na N
+//Avengers: Age of Ultron//
+//Spider-Man//
+//Transformers: Revenge of the Fallen//
+
+**SELECT name AS tytul FROM tbFilmy WHERE tytul BETWEEN 'D' AND 'G';** — wybierz filmy, których tytuł zaczyna się na <D,G)
+**SELECT name, imdb_rating FROM tbFilmy WHERE imdb_rating BETWEEN 5 AND 8;** — wybierz filmy, które mają ocenę <5,8> (WARTOŚCI LICZBOWE!!!)
+
+== KWERENDY AGREGUJĄCE -dokonują obliczenia ==
+
+**SELECT AVG(downolands) FROM tbApps;** - średnia
+	możemy wybrać wszystkie dane, które są poniżej lub powyżej średniej:  **SELECT name, downloads FROM tbApps WHERE downloads > (SELECT AVG(downloads) FROM tbApps);**
+					**SELECT name, downloads FROM tbApps WHERE downloads > (SELECT AVG(downloads) FROM tbApps) ORDER BY downloads DESC LIMIT 5; **- malejąco 5 wyników
+
+**SELECT COUNT(name) FROM tbApps;** - zlicz ilość aplikacji w bazie
+**SELECT COUNT(name) FROM tbApps WHERE downloads > (SELECT AVG(downloads) FROM tbApps);** - zlicz aplikacje w których downloads > średnia
+
+SELECT price, **COUNT(*)** FROM tbApps; - zlicz wszystkie rekordy
+
+**SELECT price, COUNT(*) FROM tbApps GROUP BY price; **- zlicz ilość rekordów zgrupowane według ceny (ile aplikacji ma daną cenę)
+//0|73//
+//0.99|43//
+//1.99|42//
+//2.99|21//
+//3.99|9//
+//14.99|12//
+
+**SELECT price, SUM(price) FROM tbApps GROUP BY price; **- zsumuj ceny 
+//0|0//
+//0.99|42.57//
+//1.99|83.58//
+//2.99|62.79   //(21*2.99)
+//3.99|35.91//
+//14.99|179.88//
+
+SELECT category, SUM(downloads) AS suma FROM tbApps GROUP BY category ORDER BY suma DESC;
+
+SELECT category, price, AVG(downloads) FROM tbApps GROUP BY category, price; - jaka jest średnia pobrań dla poszczególnych kategorii i cen
+
+>>>>>>> b86d8b4c86d2cbf3ef8a6fe61f1a704bbacf1a22
+
+FORMAT CSV
+
+
+ls -al
+sqlite3 nazwabazydanych.db < plik.sql
+sqlite3 nazwabazy.db
+	.tables
+	.schema nazwatabeli
+
+https://www.sqlpedia.pl/projektowanie-i-normalizacja-bazy-danych
+
+__Normalizacja__ to bezstratny proces organizowania danych w tabelach mający na celu zmniejszenie ilości danych składowanych w bazie oraz wyeliminowanie potencjalnych anomalii
+
+* PIERWSZA POSTAĆ NORMALNA 
+   atomowość danych - każde pole w bazie przechowuje jedną informacje
+			Mówimy, że tabela (encja) jest w pierwszej postaci normalnej, kiedy wiersz przechowuje informacje o pojedynczym obiekcie, nie zawiera kolekcji, posiada klucz główny (kolumnę lub grupę kolumn jednoznacznie identyfikujących go w zbiorze) a dane są atomowe.
+			
+* DRUGA POSTAĆ NORMALNA
+   każda tabela powinna przechowywać dane dotyczące tylko konkretnej klasy obiektów
+			Normalizując do 2NF, wydzielić należy zbiór atrybutów (kolumn) który jest zależny tylko od klucza głównego. Wszystkie atrybuty informacyjne (nie należące do klucza), muszą zawierać informacje o elementach tej konkretnej klasy (encji, tabeli) a nie żadnej innej.
+
+* TRZECIA POSTAĆ NORMALNA
+   kolumna informacyjna nie należąca do klucza nie zależy też od innej kolumny informacyjnej, nie należącej do klucza (Czyli każdy niekluczowy argument jest bezpośrednio zależny tylko od klucza głównego a
+   nie od innej kolumny )
+
+__Więzy integralności__ (constrains) to mechanizmy, które wymuszają na bazie danych kontrolę pól, dzięki czemu jest ona spójna.
+	PRIMARY KEY - klucz główny
+	UNIQUE - unikalność wartości w kolumnie
+	AUTONUMERIC
+	NOT NULL - zapobiega wstawianiu wartości NULL do kolumny
+	NULL - nic
+	FOREIGN KEY - klucz obcy definiuje relacje między tabelami
+	REFERENCES = FOREIGN KEY                                       pole REFERENCES tabela(inne pole)
+	CHECK - zapewnia, że wartość wstawiona do kolumny spełnia wymagany warunek logiczny (np. liczba1 > liczby2)
+
+LICZBOWE TYPY DANYCH:
+	INTEGER -
+	SMALLINT
+	TINYINT
+	
+LICZBY ZMIENNOPRZECINKOWE:
+	DECIMAL
+	NUMERIC
+	MONEY
+	SMALL
+
+TEKSTOWE TYPY DANYCH:
+	TEXT
+	CHARACTER(n) / CHAR(n)
+	VARCHAR(N)
+	
+BINARNE TYPY DANYCH:
+	BLOB
+	
+KODOWANIE = UTF-8
+
+data jako TEXT
+ISO8601  data YYYY-MM-DD
+		   godzina HH:MM:SS.SSS
+
+data jako REAL
+numer dnia, który upłynął od 
+
+klauzula DEFAULT - wartość domyślna
+
+plik/wczytaj ponownie z kodowaniem/wschodnioeuropejskie/WINDOWS-1250
+dokument/ustaw kodowanie znaków/unicode/utf-8
+dokument/wyświetlanie znaków końca wiersza/konwertuj i ustaw na lf
+
+{{~/Obrazy/Zrzut ekranu z 2018-10-05 08-26-26.png?width=1000}}
+
+SELECT klasa, nazwisko, imie, egz_mat FROM klasy **INNER JOIN** uczniowie **ON**  klasy.id = uczniowie.id_klasa WHERE klasa = '1A'
