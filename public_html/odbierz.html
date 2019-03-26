@@ -1,0 +1,20 @@
+<?php
+   
+
+    // foreach($messages as $message){
+    //     echo $message->tekst."<br";
+    // }
+    
+
+?>
+
+<ul class="list-group">
+        <?php
+         global $messages;
+         loadMessages();
+           foreach($messages as $message){
+                $nadawca=getUzytkownikByUId($message->id_nadawcy);
+                echo "<li class=\"list-group-item\"> $message->tekst </li>";
+            }
+        ?>
+    </ul>

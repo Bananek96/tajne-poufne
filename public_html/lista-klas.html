@@ -1,0 +1,16 @@
+<?php
+    global $klasy;
+    //TODO Remove this hardcore reload here
+    loadKlasy();
+?>
+
+<div class="container">
+    <h2>Lista klas</h2>
+    <ul class="list-group">
+        <?php
+            foreach($klasy as $klasa){
+                echo "<li class=\"list-group-item\"> $klasa->id, $klasa->nazwa, $klasa->roknaboru, $klasa->rokmatury </li>";
+            }
+        ?>
+    </ul>
+</div>

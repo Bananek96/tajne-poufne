@@ -1,0 +1,47 @@
+<?php
+    if (isset($_POST['acc3'])) {
+        foreach ($_POST as $k => $v) {
+            ${$k} = clrtxt($v);
+        }
+        echo '<p>';
+        echo $nazwa."<br>";
+        echo $roknaboru."<br>";
+        echo $rokmatury."<br>";
+        echo '</p>';
+      
+
+        
+        $klasa = new klasa(-1,$nazwa, $roknaboru, $rokmatury);
+        if($klasa->isValid() ){
+            $klasa->save();
+            $kom[]='Zapisano klasę';
+            get_kom();
+        }else{
+            $kom[]='Taka klasa istnieje lub wprowadzono niepoprawne dane';
+            get_kom();
+    
+        }
+		
+    }else{
+
+    
+?>
+<form method="POST" action="?id=<?php echo $id; ?>">
+    <input type="hidden" name="acc3" value="mojform" />
+    <div class="form-group">
+        <label for="nazwa">Nazwa klasy:</label>
+        <input type="text" name="nazwa" id="nazwa" class="form-control" required maxlength="10" />
+    </div>
+    <div class="form-group">
+        <label for="roknaboru">Rok naboru:</label>
+        <input type="text" name="roknaboru" id="roknaboru" class="form-control" required maxlength="20" />
+    </div>
+    <div class="form-group">
+        <label for="rokmatury">Rok matury:</label>
+        <input type="text" name="rokmatury" id="rokmatury" class="form-control" required maxlength="30" />
+    </div>
+    <button type="submit" class="btn btn-primary">Wyślij</button>
+</form>
+<?php
+    }
+?>

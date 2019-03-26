@@ -1,0 +1,70 @@
+<?php
+    if (isset($_POST['acc3'])) {
+        foreach ($_POST as $k => $v) {
+            ${$k} = clrtxt($v);
+        }
+        echo '<p>';
+        echo $imie."<br>";
+        echo $nazwisko."<br>";
+        echo $plec."<br>";
+        echo $klasa."<br>";
+        echo '</p>';
+      
+
+        $uczen=new uczen(-1, $imie, $nazwisko, $plec, $klasa);
+        
+        if($uczen->isValid()){
+            $uczen->save();
+            $kom[]='Zapisano ucznia';
+            get_kom();
+        }else{
+            $kom[]="Taki uczeń istnieje lub wprowadzono niepoprawne dane";
+            get_kom();
+        }
+        
+        
+  
+		
+    }else{
+
+    
+?>
+<form method="POST" action="?id=<?php echo $id; ?>">
+    <input type="hidden" name="acc3" value="mojform" />
+    <div class="form-group">
+        <label for="imie">Imie:</label>
+        <input type="text" name="imie" id="imie" class="form-control" required maxlength="25" />
+    </div>
+    <div class="form-group">
+        <label for="nazwisko">Nazwisko:</label>
+        <input type="text" name="nazwisko" id="nazwisko" class="form-control" required maxlength="30" />
+    </div>
+    <div class="form-group">
+        <label for="plec">Płeć:</label>
+        <br>
+        <!-- <input type="text" name="plec" id="plec" class="form-control" required maxlength="30" /> -->
+        <select class="form-control" name="plec" id="plec">
+          <option value="1" selected>Mężczyzna</option>
+          <option value="0">Kobieta</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <label for="klasa">Klasa:</label>
+      <select class="form-control" name="klasa" id="klasa">
+        <?php
+            global $klasy;
+            //TODO Remove this load here
+            loadKlasy();
+            foreach($klasy as $klasa){
+                echo "<option value=\"$klasa->id\">$klasa->nazwa</option>";
+            }
+        ?>
+      </select>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Wyślij</button>
+</form>
+<?php
+    }
+?>

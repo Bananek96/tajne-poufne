@@ -1,0 +1,53 @@
+<?php
+    global $user;
+    
+    if(!$user->uid){
+        echo "Aby wysłać wiadomość musisz się zalogować";
+    }else{
+
+        if (isset($_POST['acc3'])) {
+            foreach ($_POST as $k => $v) {
+                ${$k} = clrtxt($v);
+            }
+            echo '<p>';
+            echo $tresc."<br>";
+            echo $adresat."<br>";
+            echo '</p>';
+
+            global $user;
+
+            $message=new message(-1, $user->uid, $adresat, $tresc);
+            $message->save();
+    
+
+        }else{
+        
+
+?>
+
+<form method="POST" action="?id=<?php echo $id; ?>">
+    <input type="hidden" name="acc3" value="mojform" />
+    <div class="form-group">
+        <label for="tresc">Treść</label>
+        <textarea class="form-control" id="tresc" rows="3" name="tresc"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="adresat">Adresat:</label>
+        <select class="form-control" name="adresat" id="adresat">
+        <?php
+            global $users;
+            loadUsers();
+            foreach($users as $user){
+                echo "<option value=\"$user->uid\">$user->email</option>";
+            }
+        ?>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Wyślij</button>
+</form>
+
+
+<?php
+    }
+    }
+?>

@@ -1,0 +1,37 @@
+[04-Mar-2019 07:35:04 Europe/Warsaw] PHP Fatal error:  Uncaught Error: Call to a member function exec() on null in /home/kl2ag2/public_html/db/db.php:18
+Stack trace:
+#0 /home/kl2ag2/public_html/index.php(18): db_exec('BEGIN;\nCREATE T...')
+#1 {main}
+  thrown in /home/kl2ag2/public_html/db/db.php on line 18
+[04-Mar-2019 07:35:05 Europe/Warsaw] PHP Fatal error:  Uncaught Error: Call to a member function exec() on null in /home/kl2ag2/public_html/db/db.php:18
+Stack trace:
+#0 /home/kl2ag2/public_html/index.php(18): db_exec('BEGIN;\nCREATE T...')
+#1 {main}
+  thrown in /home/kl2ag2/public_html/db/db.php on line 18
+[04-Mar-2019 07:35:05 Europe/Warsaw] PHP Fatal error:  Uncaught Error: Call to a member function exec() on null in /home/kl2ag2/public_html/db/db.php:18
+Stack trace:
+#0 /home/kl2ag2/public_html/index.php(18): db_exec('BEGIN;\nCREATE T...')
+#1 {main}
+  thrown in /home/kl2ag2/public_html/db/db.php on line 18
+[04-Mar-2019 07:35:44 Europe/Warsaw] PHP Fatal error:  Uncaught Error: Call to a member function exec() on null in /home/kl2ag2/public_html/db/db.php:18
+Stack trace:
+#0 /home/kl2ag2/public_html/index.php(18): db_exec('BEGIN;\nCREATE T...')
+#1 {main}
+  thrown in /home/kl2ag2/public_html/db/db.php on line 18
+[04-Mar-2019 07:35:45 Europe/Warsaw] PHP Fatal error:  Uncaught Error: Call to a member function exec() on null in /home/kl2ag2/public_html/db/db.php:18
+Stack trace:
+#0 /home/kl2ag2/public_html/index.php(18): db_exec('BEGIN;\nCREATE T...')
+#1 {main}
+  thrown in /home/kl2ag2/public_html/db/db.php on line 18
+[04-Mar-2019 07:35:45 Europe/Warsaw] PHP Fatal error:  Uncaught Error: Call to a member function exec() on null in /home/kl2ag2/public_html/db/db.php:18
+Stack trace:
+#0 /home/kl2ag2/public_html/index.php(18): db_exec('BEGIN;\nCREATE T...')
+#1 {main}
+  thrown in /home/kl2ag2/public_html/db/db.php on line 18
+[04-Mar-2019 08:27:07 Europe/Warsaw] PHP Fatal error:  Uncaught Error: Call to undefined function clrtxt() in /home/kl2ag2/public_html/formularz.html:5
+Stack trace:
+#0 /home/kl2ag2/public_html/inc/functions.php(20): include()
+#1 /home/kl2ag2/public_html/inc/template.php(55): get_page_content('formularz')
+#2 /home/kl2ag2/public_html/index.php(24): include_once('/home/kl2ag2/pu...')
+#3 {main}
+  thrown in /home/kl2ag2/public_html/formularz.html on line 5

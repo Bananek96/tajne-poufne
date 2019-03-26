@@ -1,0 +1,19 @@
+<?php
+    global $uczniowie;
+    //TODO Remove this hardcore reload here
+    loadUczniowie();
+?>
+
+<div class="container">
+    <h2>Lista uczniów</h2>
+    <ul class="list-group">
+        <?php
+        global $uczniowie;
+            foreach($uczniowie as $uczen){
+                $plec=$uczen->getPlec();
+                $klasaNazwa=$uczen->getKlasaName();
+                echo "<li class=\"list-group-item\"> $uczen->id, $uczen->imie, $uczen->nazwisko, $plec, $klasaNazwa </li>";
+            }
+        ?>
+    </ul>
+</div> 
